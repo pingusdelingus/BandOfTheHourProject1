@@ -5,10 +5,10 @@ public class bandHourPractice {
     private static final byte MAX_ROWS = 10;
     private static final byte MAX_POSITIONS = 8;
     private static final byte ROW_START_VAL = 65;
-
+    private static final byte MIN = 0;
 
     public static void main(String[] args) {
-        int numOfRows,
+        int numOfRows;
 
         numOfRows = 0;
         char rowChar, userDecision;
@@ -41,16 +41,22 @@ public class bandHourPractice {
             userDecision = keyboard.next().charAt(0);
             switch (userDecision){
                 case 'A':
+                case 'a':
                     // run addBandMember METHOD
+
                     break;
                 case 'R':
+                case 'r':
                     //run removeBandMember METHOD
                     break;
                 case 'X':
+                case 'x':
                     //exit code and end main METHOD
                     break;
+                default:
+                    System.out.println("Uh oh! This shouldn't have happened. Please contact Esteban Morales to fix this.");
             }// end of switch statement
-        } while (keyboard.next().charAt(0) != 'X');
+        } while (userDecision != 'X');
 
 
     }// end of the main METHOD
@@ -59,13 +65,13 @@ public class bandHourPractice {
         System.out.println("Please enter number of rows");
         numberRows = keyboard.nextInt();
         do {
-            if (numberRows > 0 && numberRows <= MAX_ROWS) {
+            if (numberRows > MIN && numberRows <= MAX_ROWS) {
                 return numberRows;
             } else {
                 System.out.println("ERROR: Out of range, try again");
                 numberRows = keyboard.nextInt();
             }
-        } while (numberRows < 0 || numberRows > MAX_ROWS);
+        } while (numberRows <= MIN || numberRows > MAX_ROWS);
 
         return numberRows;
 
@@ -114,6 +120,87 @@ public class bandHourPractice {
 
 
     }// end of the displayJaggedArray METHOD
+
+    private static void addBandMember(double[][] bandSetup){
+    int index, jdex, offset, rowLetterInt, positionNumber;
+    char rowLetter;
+    double musicianWeight;
+    boolean weightBool;
+
+        // asks user for which row they wish to add a band member into
+        System.out.println("Please enter row letter");
+        rowLetter = keyboard.next().charAt(0);
+
+
+        rowLetterInt = (int) rowLetter;
+        offset = (int) rowLetter;
+        offset = offset - ROW_START_VAL;
+
+
+        do {
+            if (offset >= 0 && offset <= 10){
+                System.out.println("Please enter position number (1 to" +  (bandSetup[offset].length + 1) + ")");
+                positionNumber = keyboard.nextInt();
+                while(positionNumber > bandSetup[offset].length || positionNumber < bandSetup[offset].length){
+                    System.out.println("ERROR: Out of range, try again");
+                    positionNumber = keyboard.nextInt();
+
+                }// end of while loop
+                System.out.println("Please enter weight (45.0 to 200.0");
+
+                musicianWeight = keyboard.nextDouble();
+                while (musicianWeight < 45.0 || musicianWeight > 200.0){
+                    System.out.println("ERROR: Out of range, try again");
+                    musicianWeight = keyboard.nextDouble();
+
+
+                }
+                // RUN checkWeightOfRow METHOD HERE
+                weightBool = checkWeightOfRow(bandSetup, rowLetterInt);
+                if (!weightBool){
+                    System.out.println("ERROR: That would exceed the average weight limit");
+                    return;
+                }
+
+                bandSetup[offset][positionNumber] = musicianWeight;
+                System.out.println("****** Musician added.");
+                return;
+
+            }// end of if statement
+            else{
+                System.out.println("ERROR: Out of range, try again");
+            }
+        }while(rowLetterInt < ROW_START_VAL && rowLetter > 75);
+
+
+
+
+    }// end of the addBandMember METHOD
+
+
+    private static boolean checkWeightOfRow(double[][] bandSetup, int rowLetterInt){
+        int index, sum;
+        int rowAverage;
+        sum = 0;
+
+        for (index = 0; index < bandSetup[rowLetterInt].length ; index++) {
+            sum = sum + (int) bandSetup[rowLetterInt][index];
+
+
+        }// end of the for loop
+
+        rowAverage = sum / bandSetup[rowLetterInt].length;
+        if (rowAverage < 100 && rowAverage >= 0){
+            return true;
+
+        }
+        else{
+            return false;
+        }
+
+
+    }// end of the checkWeightOfRow METHOD
+
 
 
 
