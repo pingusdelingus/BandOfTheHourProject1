@@ -21,7 +21,7 @@ public class checkfib {
 
         returnVal = FibChecking(inputNum);
 
-        System.out.println("It is: " + returnVal + " that your number: " + inputNum + " is a fibonacci number");
+        System.out.println("It is " + returnVal + " that your number: " + inputNum + " is a fibonacci number");
         long endTime = System.nanoTime();
         long totalTime = endTime - startTime;
         System.out.println("This program took: " + totalTime);
