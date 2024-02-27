@@ -38,23 +38,23 @@ public class bandHourPractice {
 
 
             System.out.println("(A)dd, (R)emove, (P)rint,          e(X)it : p");
-            userDecision = keyboard.next().charAt(0);
-            switch (userDecision){
+            userDecision = Character.toUpperCase(keyboard.next().charAt(0));
+            switch (userDecision) {
                 case 'A':
-                case 'a':
+
                     // run addBandMember METHOD
                     addBandMember(bandSetup);
 
                     break;
                 case 'R':
-                case 'r':
+
                     //run removeBandMember METHOD
                     removeBandMember(bandSetup);
                     break;
                 case 'P':
                     displayJaggedArray(bandSetup, rowChar);
                 case 'X':
-                case 'x':
+
                     //exit code and end main METHOD
                     break;
                 default:
@@ -86,7 +86,6 @@ public class bandHourPractice {
         int index, numPositions;
 
 
-
         for (index = 0; index < numOfRows; index++) {
             rowChar = (char) (ROW_START_VAL + index);
             System.out.println("Please enter the number of positions in row " + rowChar);
@@ -107,6 +106,8 @@ public class bandHourPractice {
     private static void displayJaggedArray(double[][] bandSetup, char charDisplay) {
         // displaying contents of the array created :D
         int index, jdex;
+        double sum, average;
+        sum = 0;
 
 
         System.out.println("Current Band of the Hour Arrangement :D");
@@ -116,30 +117,34 @@ public class bandHourPractice {
             for (jdex = 0; jdex < bandSetup[index].length; jdex++) {
 
                 System.out.print(bandSetup[index][jdex]);
-                System.out.print("   ");
-            }
+                System.out.print("     ");
+                sum = sum + bandSetup[index][jdex];
+
+
+            }// end of for loop
+            average = sum / bandSetup[index].length;
+
+            System.out.print("                       [  " + sum + ",   " + average + " ]");
             System.out.println();
         }
-        System.out.println();
 
 
     }// end of the displayJaggedArray METHOD
 
-    private static void addBandMember(double[][] bandSetup){
-    int offset, rowLetterInt, positionNumber;
-    char rowLetter;
-    double musicianWeight;
-    boolean weightBool;
-    positionNumber = 0;
-    musicianWeight = 0.0;
+    private static void addBandMember(double[][] bandSetup) {
+        int offset, rowLetterInt, positionNumber;
+        char rowLetter;
+        double musicianWeight;
+        boolean weightBool;
+
 
         // asks user for which row they wish to add a band member into
         System.out.println("Please enter row letter");
 
-        rowLetter = keyboard.next().charAt(0);
+        rowLetter = Character.toUpperCase(keyboard.next().charAt(0));
 
 
-        while( (int) rowLetter < ROW_START_VAL || ((int) rowLetter > 75) ){
+        while ((int) rowLetter < ROW_START_VAL || ((int) rowLetter > 75)) {
             System.out.println("ERROR: Out of range, try again");
             rowLetter = keyboard.next().charAt(0);
 
@@ -150,66 +155,62 @@ public class bandHourPractice {
         offset = offset - ROW_START_VAL;
 
 
-            System.out.println("Please enter position number (1 to " + (bandSetup[offset].length) + ")");
+        System.out.println("Please enter position number (1 to " + (bandSetup[offset].length) + ")");
+        positionNumber = keyboard.nextInt();
+
+        while (positionNumber < 0 || positionNumber > bandSetup[offset].length) {
+            System.out.println("ERROR: Out of range, try again");
             positionNumber = keyboard.nextInt();
 
-            while (positionNumber < 0 || positionNumber > bandSetup[offset].length) {
-                System.out.println("ERROR: Out of range, try again");
-                positionNumber = keyboard.nextInt();
+        }// end of the while loop
+        System.out.println("Please enter weight (45.0 to 200.0 kg)");
 
-            }// end of the while loop
-            System.out.println("Please enter weight (45.0 to 200.0 kg)");
-
+        musicianWeight = keyboard.nextDouble();
+        while (musicianWeight < 45.0 || musicianWeight > 200.0) {
+            System.out.println("ERROR: Out of range, try again");
             musicianWeight = keyboard.nextDouble();
-            while (musicianWeight < 45.0 || musicianWeight > 200.0) {
-                System.out.println("ERROR: Out of range, try again");
-                musicianWeight = keyboard.nextDouble();
 
 
-            }// end of the while loop
-            // RUN checkWeightOfRow METHOD HERE
-            weightBool = checkWeightOfRow(bandSetup, rowLetterInt);
-            if (!weightBool) {
-                System.out.println("ERROR: That would exceed the average weight limit");
-                return;
-            }// end of the if statement
+        }// end of the while loop
 
-            else{
+        // RUN checkWeightOfRow METHOD HERE
+
+
+        weightBool = checkWeightOfRow(bandSetup, rowLetterInt, musicianWeight);
+
+
+        if (!weightBool) {
+            System.out.println("ERROR: That would exceed the average weight limit.");
+            return;
+        } else {
             bandSetup[offset][positionNumber - 1] = musicianWeight;
-            System.out.println("****** Musician added.");
-                return;
+            return;
+        }
 
 
-        }// end of the if statement
-
-
-
-
-
-
+        // end of the if statement
 
 
     }// end of the addBandMember METHOD
 
 
-    private static boolean checkWeightOfRow(double[][] bandSetup, int rowLetterInt){
-        int index, sum, offset;
-        int rowAverage;
+    private static boolean checkWeightOfRow(double[][] bandSetup, int rowLetterInt, double musicianWeight) {
+        int index, offset;
+        double sum;
         sum = 0;
         offset = rowLetterInt - ROW_START_VAL;
 
-        for (index = 0; index < bandSetup[offset].length ; index++) {
-            sum = sum + (int) bandSetup[offset][index];
+        for (index = 0; index < bandSetup[offset].length; index++) {
+            sum = sum + bandSetup[offset][index];
 
 
         }// end of the for loop
 
-        rowAverage = sum / bandSetup[offset].length;
-        if (rowAverage < 100 && rowAverage >= 0){
+
+        if (sum + musicianWeight  < 100 * bandSetup[offset].length + 1) {
             return true;
 
-        }
-        else{
+        } else {
             return false;
         }
 
@@ -217,39 +218,44 @@ public class bandHourPractice {
     }// end of the checkWeightOfRow METHOD
 
 
-
-    private static void removeBandMember(double[][] bandSetup){
+    private static void removeBandMember(double[][] bandSetup) {
         int offset, rowLetterInt, positionNumber;
         char rowLetter;
 
 
         // asks user for which row they wish to add a band member into
         System.out.println("Please enter row letter");
-        rowLetter = keyboard.next().charAt(0);
+        rowLetter = Character.toUpperCase(keyboard.next().charAt(0));
 
 
         rowLetterInt = (int) rowLetter;
+
         offset = (int) rowLetter;
         offset = offset - ROW_START_VAL;
 
-        while (rowLetterInt > 75 && rowLetterInt < 65){
+        while (rowLetterInt > 75 && rowLetterInt < 65) {
             System.out.println("ERROR: Out of range, try again");
             rowLetter = keyboard.next().charAt(0);
+            rowLetterInt = (int) rowLetter;
 
         }
-        System.out.println("Please enter Position Number (1 to " + (bandSetup[rowLetterInt].length +1));
+        System.out.println("Please enter Position Number (1 to " + (bandSetup[rowLetterInt].length + 1));
         positionNumber = keyboard.nextInt();
 
-        while (positionNumber < 0 && positionNumber > bandSetup[rowLetterInt].length + 1){
+        while (positionNumber < 0 && positionNumber > bandSetup[rowLetterInt].length + 1) {
             System.out.println("ERROR: Out of range, try again");
             positionNumber = keyboard.nextInt();
 
         }
-        bandSetup[rowLetterInt][positionNumber-1] = 0.0;
+        if (bandSetup[rowLetterInt][positionNumber - 1] == 0.0) {
+            System.out.println("ERROR: That position is vacant.");
+            return;
+        }
+
+        bandSetup[rowLetterInt][positionNumber - 1] = 0.0;
+        return;
 
     }// end of the removeBandMember METHOD
-
-
 
 
 }// end of the bandHourPractice CLASS
