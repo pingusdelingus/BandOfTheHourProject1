@@ -10,19 +10,19 @@ import java.util.Scanner;
 
 public class bandHourPractice {
     /** Importing Scanner class to allow user input.
-     @imports Scanner class
+     @import Scanner class
       */
-    private static final Scanner keyboard = new Scanner(System.in);
+    public static final Scanner keyboard = new Scanner(System.in);
     /**
      * Final constants for the program
      * */
-    private static final byte MAX_ROWS = 10;
-    private static final byte MAX_POSITIONS = 8;
+    public static final byte MAX_ROWS = 10; // max number of rows
+    public static final byte MAX_POSITIONS = 8;
     /**
      * ASCII value for 'A'.
      */
-    private static final byte ROW_START_VAL = 65;
-    private static final byte MIN = 0;
+    public static final byte ROW_START_VAL = 65;
+    public static final byte MIN = 0;
     /**
      * Main method for the program
      * */
@@ -120,7 +120,7 @@ public class bandHourPractice {
      * @param numberRows (int)
      * @return numberRows (int)
      */
-    private static int getNumOfRows(int numberRows) {
+    public static int getNumOfRows(int numberRows) {
         System.out.println("Please enter number of rows");
         numberRows = keyboard.nextInt();
         do {
@@ -144,7 +144,7 @@ public class bandHourPractice {
      * @param numOfRows (int)
      * @param rowChar (char)
      */
-    private static void setupPositionsInRow(double[][] bandSetup, int numOfRows, char rowChar) {
+    public static void setupPositionsInRow(double[][] bandSetup, int numOfRows, char rowChar) {
         //sets up the jagged array values
         int index, numPositions;
 
@@ -172,7 +172,7 @@ public class bandHourPractice {
      * @param bandSetup (jagged array of doubles)
      * @param charDisplay (char)
      */
-    private static void displayJaggedArray(double[][] bandSetup, char charDisplay) {
+    public static void displayJaggedArray(double[][] bandSetup, char charDisplay) {
 
         int index, jdex;
         double sum, average;
@@ -206,7 +206,7 @@ public class bandHourPractice {
     /** Method to add a band member to the jagged array
      * @param bandSetup (jagged array of doubles)
      */
-    private static void addBandMember(double[][] bandSetup) {
+    public static void addBandMember(double[][] bandSetup) {
         int offset, rowLetterInt, positionNumber;
         char rowLetter;
         double musicianWeight;
@@ -281,7 +281,7 @@ public class bandHourPractice {
      * @return boolean
      */
 
-    private static boolean checkWeightOfRow(double[][] bandSetup, int rowLetterInt, double musicianWeight) {
+    public static boolean checkWeightOfRow(double[][] bandSetup, int rowLetterInt, double musicianWeight) {
         int index, offset;
         double sum;
         sum = 0;
@@ -308,7 +308,7 @@ public class bandHourPractice {
     /** Method to remove a band member from the jagged array
      * @param bandSetup (jagged array of doubles)
      */
-    private static void removeBandMember(double[][] bandSetup) {
+    public static void removeBandMember(double[][] bandSetup) {
         int offset, rowLetterInt, positionNumber;
         char rowLetter;
 
