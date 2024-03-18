@@ -182,12 +182,13 @@ public class bandHourPractice {
         maxPositions = 0;
         positionsInRows = 0;
 
-
+        // for loop to find the max number of positions in the jagged array
         for (index = 0; index < bandSetup.length; index++) {
             double[] row = bandSetup[index];
             if (row.length > maxPositions) {
                 maxPositions = row.length;
             }
+            // for loop to find the max weight width in the jagged array
             for (jdex = 0; jdex < row.length; jdex++) {
                 double weight = row[jdex];
                 String weightString = String.valueOf(weight);
@@ -200,7 +201,7 @@ public class bandHourPractice {
         sumAvgWidth = maxWeightWidth + 9;
 
         System.out.println("Current Band of the Hour Arrangement :D");
-
+        // for loop to display the jagged array for the user
         for (kdex = 0; kdex < bandSetup.length; kdex++) {
             charDisplay = (char) (ROW_START_VAL + kdex);
             System.out.printf("%-4s:   ", charDisplay);
@@ -260,7 +261,7 @@ public class bandHourPractice {
 
         System.out.println("Please enter position number (1 to " + (bandSetup[offset].length) + ")");
         positionNumber = keyboard.nextInt();
-
+        // while loop to check if the position number is within the range of 1 to the length of the row
         while (positionNumber < 0 || positionNumber > bandSetup[offset].length) {
             System.out.println("ERROR: Out of range, try again");
             positionNumber = keyboard.nextInt();
@@ -272,7 +273,7 @@ public class bandHourPractice {
         }
 
         System.out.println("Please enter weight (45.0 to 200.0 kg)");
-
+        // while loop to check if the weight is within the range of 45.0 to 200.0
         musicianWeight = keyboard.nextDouble();
         while (musicianWeight < 45.0 || musicianWeight > 200.0) {
             System.out.println("ERROR: Out of range, try again");
@@ -286,7 +287,7 @@ public class bandHourPractice {
 
         weightBool = checkWeightOfRow(bandSetup, rowLetterInt, musicianWeight);
 
-
+        // if statement to check if the weight is within the average weight limit
         if (!weightBool) {
             System.out.println("ERROR: That would exceed the average weight limit.");
             return;
@@ -314,14 +315,14 @@ public class bandHourPractice {
         double sum;
         sum = 0;
         offset = rowLetterInt - ROW_START_VAL;
-
+        // for loop to check the weight of the row
         for (index = 0; index < bandSetup[offset].length; index++) {
             sum += bandSetup[offset][index];
 
 
         }// end of the for loop
 
-
+        // if statement to check if the weight is within the average weight limit
         if (sum + musicianWeight  < 100 * bandSetup[offset].length + 1) {
             return true;
 
@@ -363,12 +364,13 @@ public class bandHourPractice {
         }
         System.out.println("Please enter Position Number (1 to " + bandSetup[offset].length + ")");
         positionNumber = keyboard.nextInt();
-
+        // while loop to check if the position number is within the range of 1 to the length of the row
         while (positionNumber < 0 || positionNumber > bandSetup[offset].length) {
             System.out.println("ERROR: Out of range, try again");
             positionNumber = keyboard.nextInt();
 
         }
+        // if statement to check if the position is vacant
         if (bandSetup[offset][positionNumber - 1] == 0.0) {
             System.out.println("ERROR: That position is vacant.");
             return;
