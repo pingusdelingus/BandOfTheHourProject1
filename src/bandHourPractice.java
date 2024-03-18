@@ -347,7 +347,6 @@ public class bandHourPractice {
 
 
         rowLetterInt = (int) rowLetter;
-
         offset = (int) rowLetter;
         offset = offset - ROW_START_VAL;
 
@@ -357,6 +356,7 @@ public class bandHourPractice {
             rowLetterInt = (int) rowLetter;
             offset = (int) rowLetter;
             offset = offset - ROW_START_VAL;
+            //creates same offsets as before for method to use
 
         }
         System.out.println("Please enter Position Number (1 to " + bandSetup[offset].length + ")");
