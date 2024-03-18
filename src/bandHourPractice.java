@@ -9,21 +9,21 @@
 import java.util.Scanner;
 
 public class bandHourPractice {
-    /** Importing Scanner class to allow user input.
+    /* Importing Scanner class to allow user input.
      @import Scanner class
       */
     public static final Scanner keyboard = new Scanner(System.in);
-    /**
+    /*
      * Final constants for the program
      * */
     public static final byte MAX_ROWS = 10; // max number of rows
     public static final byte MAX_POSITIONS = 8;
-    /**
+    /*
      * ASCII value for 'A'.
      */
     public static final byte ROW_START_VAL = 65;
     public static final byte MIN = 0;
-    /**
+    /*
      * Main method for the program
      * */
     public static void main(String[] args) {
@@ -38,47 +38,47 @@ public class bandHourPractice {
         System.out.println("Welcome to the Band of the Hour");
         System.out.println("-------------------------------");
 
-        /**calls getNumOfRows method to retrieve the number of rows from the user.
+        /*calls getNumOfRows method to retrieve the number of rows from the user.
          * @param numOfRows
          */
         numOfRows = getNumOfRows(numOfRows);
 
 
-        /** Initializes jagged array with numOfRows # of rows
+        /* Initializes jagged array with numOfRows # of rows
          *
          */
 
         double[][] bandSetup = new double[numOfRows][];
-        /** call method to set up size of jagged array
+        /* call method to set up size of jagged array
          * @param bandSetup (jagged array of doubles)
          */
         setupPositionsInRow(bandSetup, numOfRows, rowChar);
 
 
-        /**
+        /*
          * Do-while loop to allow user to add, remove, or print the jagged array Until 'X' or 'x' is entered.
          */
 
         do {
 
-            /** call method to display the jagged array for the user in the console
+            /* call method to display the jagged array for the user in the console
              * @param bandSetup (jagged array of doubles)
              * @param rowChar (char)
              */
             displayJaggedArray(bandSetup, rowChar);
             System.out.println("(A)dd, (R)emove, (P)rint,          e(X)it : p");
 
-            /** User input to decide what to do with the jagged array
+            /* User input to decide what to do with the jagged array
              * @param userDecision (char)
              */
             userDecision = Character.toUpperCase(keyboard.next().charAt(0));
-            /** Switch statement to decide what to do with the jagged array
+            /* Switch statement to decide what to do with the jagged array
              * @param userDecision (char)
              */
             switch (userDecision) {
                 case 'A':
 
-                    /** run addBandMember METHOD
+                    /* run addBandMember METHOD
                      * @param bandSetup (jagged array of doubles)
                      */
                     addBandMember(bandSetup);
@@ -86,13 +86,13 @@ public class bandHourPractice {
                     break;
                 case 'R':
 
-                    /**run removeBandMember METHOD
+                    /*run removeBandMember METHOD
                      * @param bandSetup (jagged array of doubles)
                      */
                     removeBandMember(bandSetup);
                     break;
                 case 'P':
-                    /** run displayJaggedArray METHOD
+                    /* run displayJaggedArray METHOD
                      * @param bandSetup (jagged array of doubles)
                      * @param rowChar (char)
                      */
@@ -102,13 +102,13 @@ public class bandHourPractice {
                     //exit code and end main METHOD
                     break;
                 default:
-                    /** default case for invalid input
+                    /* default case for invalid input
                      * */
 
                     System.out.println("ERROR: Invalid option, try again:");
                     break;
             }// end of switch statement
-            /** do while loop to continue the program until user enters 'X' or 'x'
+            /* do while loop to continue the program until user enters 'X' or 'x'
              * @param userDecision (char)
              */
         } while (userDecision != 'X');
@@ -124,7 +124,7 @@ public class bandHourPractice {
         System.out.println("Please enter number of rows");
         numberRows = keyboard.nextInt();
         do {
-            /** do while loop to check if the number of rows is within the range of 1 to 10
+            /* do while loop to check if the number of rows is within the range of 1 to 10
 
              */
             if (numberRows > MIN && numberRows <= MAX_ROWS) {
@@ -153,7 +153,7 @@ public class bandHourPractice {
             rowChar = (char) (ROW_START_VAL + index);
             System.out.println("Please enter the number of positions in row " + rowChar);
             numPositions = keyboard.nextInt();
-            /** while loop to check if the number of positions is within the range of 1 to 8.
+            /* while loop to check if the number of positions is within the range of 1 to 8.
              */
 
             while (numPositions < 0 || numPositions > MAX_POSITIONS) {
@@ -280,7 +280,6 @@ public class bandHourPractice {
      * @param musicianWeight (double)
      * @return boolean
      */
-
     public static boolean checkWeightOfRow(double[][] bandSetup, int rowLetterInt, double musicianWeight) {
         int index, offset;
         double sum;
@@ -313,7 +312,7 @@ public class bandHourPractice {
         char rowLetter;
 
 
-        /** asks user for which row they wish to remove a band member into
+        /* asks user for which row they wish to remove a band member into
          * @param rowLetter (char)
          */
         System.out.println("Please enter row letter");
