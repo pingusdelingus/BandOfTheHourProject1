@@ -174,7 +174,7 @@ public class bandHourPractice {
      */
     public static void displayJaggedArray(double[][] bandSetup, char charDisplay) {
 
-        int index, jdex, maxPositions, maxWeightWidth, sumAvgWidth, positionsInRows;
+        int index, jdex, kdex, rdex, maxPositions, maxWeightWidth, sumAvgWidth, positionsInRows;
         double sum, average;
 
         maxWeightWidth = 5;
@@ -183,13 +183,15 @@ public class bandHourPractice {
         positionsInRows = 0;
 
 
-        for( double[] row : bandSetup){
-            if (row.length > maxPositions){
+        for (index = 0; index < bandSetup.length; index++) {
+            double[] row = bandSetup[index];
+            if (row.length > maxPositions) {
                 maxPositions = row.length;
             }
-            for (double weight : row) {
+            for (jdex = 0; jdex < row.length; jdex++) {
+                double weight = row[jdex];
                 String weightString = String.valueOf(weight);
-                if (weightString.length() > maxWeightWidth){
+                if (weightString.length() > maxWeightWidth) {
                     maxWeightWidth = weightString.length();
                 }
             }
@@ -199,15 +201,15 @@ public class bandHourPractice {
 
         System.out.println("Current Band of the Hour Arrangement :D");
 
-        for (index = 0; index < bandSetup.length; index++) {
-            charDisplay = (char) (ROW_START_VAL + index);
+        for (kdex = 0; kdex < bandSetup.length; kdex++) {
+            charDisplay = (char) (ROW_START_VAL + kdex);
             System.out.printf("%-4s:   ", charDisplay);
-            positionsInRows = bandSetup[index].length;
+            positionsInRows = bandSetup[kdex].length;
 
-            for (jdex = 0; jdex < maxPositions; jdex++) {
-                if (jdex < positionsInRows) {
-                    System.out.printf("%-" + maxWeightWidth + ".1f     ", bandSetup[index][jdex]);
-                    sum = sum + bandSetup[index][jdex];
+            for (rdex = 0; rdex < maxPositions; rdex++) {
+                if (rdex < positionsInRows) {
+                    System.out.printf("%-" + maxWeightWidth + ".1f     ", bandSetup[kdex][rdex]);
+                    sum = sum + bandSetup[kdex][rdex];
                 } else {
                     System.out.printf("%-" + maxWeightWidth + "s     ", "");
                 }
@@ -217,7 +219,7 @@ public class bandHourPractice {
 
 
             }// end of for loop
-            average = sum / bandSetup[index].length;
+            average = sum / bandSetup[kdex].length;
 
             System.out.printf(" [ %-" + sumAvgWidth + ".1f, %-" + sumAvgWidth + ".1f ]%n", sum, average);
 
